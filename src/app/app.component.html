@@ -1,0 +1,20 @@
+<header [attr.theme]="theme" [attr.mobileMode]="mobileMode">
+  <h1>
+    <a href="https://github.com/dudushy/cripto.ng" target="_blank">cripto.ng</a>
+  </h1>
+
+  <img *ngIf="theme == 'dark'" (click)="toggleTheme('light')" alt="dark theme" src="assets/SVGs/sunny.svg">
+  <img *ngIf="theme == 'light'" (click)="toggleTheme('dark')" alt="light theme" src="assets/SVGs/moon.svg">
+</header>
+
+<router-outlet></router-outlet>
+
+<footer [attr.theme]="theme" [attr.mobileMode]="mobileMode">
+  <p>
+    Made with <span id="heart">&#10084;</span>
+    <br>
+    by
+    <br>
+    <a href="https://github.com/dudushy" target="_blank">dudushy</a>
+  </p>
+</footer>
