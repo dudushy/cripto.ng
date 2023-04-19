@@ -1,6 +1,6 @@
 <header [attr.theme]="theme" [attr.mobileMode]="mobileMode">
   <h1>
-    <a href="https://github.com/dudushy/cripto.ng" target="_blank">cripto.ng</a>
+    <a [attr.theme]="theme" href="https://github.com/dudushy/cripto.ng" target="_blank">cripto.ng</a>
   </h1>
 
   <nav>
@@ -11,11 +11,11 @@
 <router-outlet></router-outlet>
 
 <footer [attr.theme]="theme" [attr.mobileMode]="mobileMode">
-  <p>
-    Made with <span id="heart">&#10084;</span>
+  <p [attr.theme]="theme">
+    Made with <span [attr.theme]="theme" id="heart">&#10084;</span>
     <br>
     by
     <br>
-    <a href="https://github.com/dudushy" target="_blank">dudushy</a>
+    <a [attr.theme]="theme" href="https://github.com/dudushy" target="_blank">dudushy</a>
   </p>
 </footer>

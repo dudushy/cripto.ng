@@ -5,13 +5,23 @@ header {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  border-bottom: 1px solid $warning;
   padding-block: 2%;
+  &[theme="dark"] {
+    border-bottom: 3px solid $warning;
+  }
+  &[theme="light"] {
+    border-bottom: 3px solid $danger;
+  }
 
   h1 {
     a {
       font-size: 2vmax;
-      color: $warning;
+      &[theme="dark"] {
+        color: $warning;
+      }
+      &[theme="light"] {
+        color: $danger;
+      }
     }
   }
 
@@ -28,34 +38,82 @@ header {
       border-radius: 10px;
       padding: 1%;
       cursor: pointer;
-      &[isActive="true"] {
-        color: $danger !important;
-        background-color: $warning !important;
-      }
+      opacity: 0.7;
       &[theme="dark"] {
         color: $dark;
-        background-color: $warning;
-      }
-      &:hover[theme="dark"] {
-        color: $warning;
-        background-color: $dark;
+        background-color: $medium;
+        &:hover {
+          color: $dark;
+          background-color: $light;
+          opacity: 1;
+        }
+        &[isActive="true"] {
+          color: $dark;
+          background-color: $warning;
+          &:hover {
+            opacity: 1;
+          }
+        }
       }
       &[theme="light"] {
         color: $light;
-        background-color: $warning;
-      }
-      &:hover[theme="light"] {
-        color: $warning;
-        background-color: $light;
+        background-color: $medium;
+        &:hover {
+          color: $light;
+          background-color: $dark;
+          opacity: 1;
+        }
+        &[isActive="true"] {
+          color: $light;
+          background-color: $danger;
+          &:hover {
+            opacity: 1;
+          }
+        }
       }
     }
   }
 }
 
 footer {
-  border-top: 1px solid $warning;
+  &[theme="dark"] {
+    border-top: 3px solid $warning;
+  }
+  &[theme="light"] {
+    border-top: 3px solid $danger;
+  }
 
   #heart {
-    color: $danger;
+    cursor: default;
+    transition: 200ms all;
+    &[theme="dark"] {
+      color: $warning;
+      &:hover {
+        color: $danger;
+      }
+    }
+    &[theme="light"] {
+      color: $danger;
+      &:hover {
+        color: $warning;
+      }
+    }
+  }
+
+  a {
+    // font-size: 2vmax;
+    transition: 200ms all;
+    &[theme="dark"] {
+      color: $warning;
+      &:hover {
+        color: $danger;
+      }
+    }
+    &[theme="light"] {
+      color: $danger;
+      &:hover {
+        color: $warning;
+      }
+    }
   }
 }
