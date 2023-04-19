@@ -1,3 +1,6 @@
 <main>
-  <p>{{currentWord}}</p>
+  <button *ngIf="!gameRunning" (click)="startGame()">START</button>
+  <button *ngIf="gameRunning" (click)="stopGame()">STOP</button>
+
+  <p *ngIf="gameRunning">{{currentWord}} {{12 - currentWord.length}}</p>
 </main>
