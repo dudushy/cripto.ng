@@ -16,6 +16,8 @@ export class AppComponent {
   window = window;
 
   theme = 'dark';
+  last_page = '';
+  all_pages: any = [];
 
   mobileMode = false;
 
@@ -26,9 +28,15 @@ export class AppComponent {
   ) {
     console.log(`[${this.title}#constructor]`);
 
-    this.redirectTo(this.db.get('last_page') || '', this.title);
+    this.all_pages = this.router.config.map((route) => route.path);
+    console.log(`[${this.title}#constructor] all_pages`, this.all_pages);
+
+    this.last_page = this.db.get('last_page') || '';
+    console.log(`[${this.title}#constructor] last_page`, this.last_page);
+    this.redirectTo(this.last_page, this.title);
 
     this.theme = this.db.get('theme') || 'dark';
+    console.log(`[${this.title}#constructor] theme`, this.theme);
     this.toggleTheme(this.theme);
 
     this.toggleMobileMode();
@@ -44,6 +52,10 @@ export class AppComponent {
     };
   }
 
+  defaultOrder() {
+    return 0;
+  }
+
   updateView(from: string) {
     console.log(`[${this.title}#updateView] from`, from);
     this.cdr.detectChanges;
@@ -53,9 +65,11 @@ export class AppComponent {
     console.log(`[${this.title}#redirectTo] ${from} | url`, url);
 
     this.router.navigateByUrl(`/${url}`);
+    console.log(`[${this.title}#redirectTo] router.url`, this.router.url);
 
+    this.last_page = url;
     this.db.set('last_page', url);
-    console.log(`[${this.title}#redirectTo] last_page`, this.db.get('last_page'));
+    console.log(`[${this.title}#redirectTo] last_page`, this.last_page);
 
     this.updateView(this.title);
   }
