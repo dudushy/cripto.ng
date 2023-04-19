@@ -11,7 +11,7 @@ echo $TITLE '- PAGE_URL=' $PAGE_URL
 PROJECT_NAME='cripto.ng'
 echo $TITLE '- PROJECT_NAME=' $PROJECT_NAME
 
-COMMIT_MESSAGE='`build.sh`'
+COMMIT_MESSAGE='`build_n_deploy.sh`'
 echo $TITLE '- COMMIT_MESSAGE=' $COMMIT_MESSAGE
 
 echo $TITLE '- - - - - - - - - - - - - - - - - - - - - - - - - -'
