@@ -11,6 +11,8 @@ import { DbService } from '../../services/db/db.service';
 export class GameComponent implements OnInit {
   title = 'GameComponent';
 
+  currentWord = '';
+
   constructor(
     public db: DbService,
     private cdr: ChangeDetectorRef,
@@ -21,6 +23,19 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(`[${this.title}#ngOnInit]`);
+
+    window.addEventListener('keypress', (event: any) => {
+      console.log(`[${this.title}#window.onkeypress] event`, event);
+      console.log(`[${this.title}#window.onkeypress] event.key`, event.key);
+
+      this.currentWord += event.key;
+
+      if (event.key === 'Enter') {
+        this.currentWord = '';
+      }
+
+      console.log(`[${this.title}#window.onkeypress] currentWord`, this.currentWord);
+    });
   }
 
   updateView() {
