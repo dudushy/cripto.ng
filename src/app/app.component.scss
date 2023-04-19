@@ -15,13 +15,40 @@ header {
     }
   }
 
-  img {
-    width: 5%;
-    padding: 1%;
-    margin: 0;
-    border-radius: 50%;
-    background-color: $warning;
-    box-shadow: 0 0 10px $warning;
+  nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 50%;
+
+    a {
+      font-size: 2vmax;
+      transition: all 250ms;
+      // text-decoration: none;
+      border-radius: 10px;
+      padding: 1%;
+      cursor: pointer;
+      &[isActive="true"] {
+        color: $danger !important;
+        background-color: $warning !important;
+      }
+      &[theme="dark"] {
+        color: $dark;
+        background-color: $warning;
+      }
+      &:hover[theme="dark"] {
+        color: $warning;
+        background-color: $dark;
+      }
+      &[theme="light"] {
+        color: $light;
+        background-color: $warning;
+      }
+      &:hover[theme="light"] {
+        color: $warning;
+        background-color: $light;
+      }
+    }
   }
 }
 
