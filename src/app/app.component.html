@@ -3,8 +3,9 @@
     <a href="https://github.com/dudushy/cripto.ng" target="_blank">cripto.ng</a>
   </h1>
 
-  <img *ngIf="theme == 'dark'" (click)="toggleTheme('light')" alt="dark theme" src="assets/SVGs/sunny.svg">
-  <img *ngIf="theme == 'light'" (click)="toggleTheme('dark')" alt="light theme" src="assets/SVGs/moon.svg">
+  <nav>
+    <a *ngFor="let page of all_pages | keyvalue : defaultOrder" [attr.theme]="theme" [attr.isActive]="last_page == page.value" (click)="redirectTo(page.value, this.title)">{{page.value == '' ? 'game' : page.value}}</a>
+  </nav>
 </header>
 
 <router-outlet></router-outlet>
