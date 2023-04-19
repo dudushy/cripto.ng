@@ -5,7 +5,9 @@ import { GameComponent } from './components/game/game.component';
 import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
-  { path: '', component: GameComponent },
+  // { path: '', redirectTo: 'game', pathMatch: 'full' }, //? Redirect to game
+  // { path: 'game', component: GameComponent }, //? Game
+  { path: '', component: GameComponent }, //? DEFAULT ROUTE
   { path: 'settings', component: SettingsComponent },
 ];
 
