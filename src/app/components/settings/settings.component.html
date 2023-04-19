@@ -1,1 +1,4 @@
-<p>settings works!</p>
+<main>
+  <img *ngIf="app.theme == 'dark'" [attr.theme]="app.theme" (click)="app.toggleTheme('light')" alt="dark theme" src="assets/SVGs/sunny.svg">
+  <img *ngIf="app.theme == 'light'" [attr.theme]="app.theme" (click)="app.toggleTheme('dark')" alt="light theme" src="assets/SVGs/moon.svg">
+</main>
