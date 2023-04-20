@@ -7,17 +7,17 @@
     <b [attr.theme]="app.theme">{{12 - currentWord.length}}</b>
   </p>
 
-  <div *ngIf="gameRunning" id="gameDiv">
-    <div *ngFor="let item of gameArray | keyvalue : defaultOrder" id="gameWord">
+  <div id="gameDiv" *ngIf="gameRunning">
+    <div class="gameWord" *ngFor="let item of gameArray | keyvalue : defaultOrder">
+
       <p>{{$any(item).value.description}}</p>
-      <table>
-        <tr *ngFor="let letter of $any(item).value.word.split('') | keyvalue : defaultOrder">
-          <td [attr.theme]="app.theme" [attr.isActive]="indexArray[$any(letter).value].active">
-            <b *ngIf="!indexArray[$any(letter).value].active" [attr.less10]="indexArray[$any(letter).value].id < 10">{{indexArray[$any(letter).value].id}}</b>
-            <b *ngIf="indexArray[$any(letter).value].active"> {{letter.value}} </b>
-          </td>
-        </tr>
-      </table>
+
+      <div class="hiddenWord">
+        <div class="hiddenLetter" *ngFor="let letter of $any(item).value.word.split('') | keyvalue : defaultOrder" [attr.theme]="app.theme" [attr.isActive]="indexArray[$any(letter).value].active">
+          <b *ngIf="!indexArray[$any(letter).value].active" [attr.less10]="indexArray[$any(letter).value].id < 10">{{indexArray[$any(letter).value].id}}</b>
+          <b *ngIf="indexArray[$any(letter).value].active"> {{letter.value}} </b>
+        </div>
+      </div>
     </div>
   </div>
 </main>
