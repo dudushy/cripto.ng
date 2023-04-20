@@ -37,74 +37,68 @@ main {
   }
 
   #gameDiv {
-    display: flex;
-    flex-direction: column;
-    margin-block: 1%;
-    margin-inline: 3%;
+    display: inline-grid;
 
-    #gameWord {
+    .gameWord {
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: space-around;
-      margin-block: 1%;
+      margin: 1%;
       border: 2px solid $success;
       border-radius: 10px;
 
       p {
-        width: 50%;
+        width: 35%;
         font-size: 0.7rem;
         margin-inline: 1%;
       }
 
-      table {
+      .hiddenWord {
         display: flex;
-        justify-content: space-between;
-        // width: 38%;
+        width: 5%;
+        // background-color: darken($medium, 20%) !important;
+        position: relative;
+        border-radius: 10px;
 
-        tr {
-          // border: 1px solid $primary;
+        .hiddenLetter {
+          background-color: darken($medium, 20%);
+          position: relative;
+          display: flex;
+          padding-inline: 1%;
+          border-left: 2px solid $success;
+          &[isActive="true"] {
+            &[theme="dark"] {
+              background-color: $warning !important;
 
-          td {
-            background-color: darken($medium, 20%);
-            position: relative;
-            // border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-inline: 5%;
-            &[isActive="true"] {
-              &[theme="dark"] {
-                background-color: $warning !important;
-
-                b {
-                  color: $dark !important;
-                  border: 5px solid $dark !important;
-                  // &::before {
-                  //   content: " ";
-                  // }
-                }
+              b {
+                color: $dark;
               }
-              &[theme="light"] {
-                background-color: $danger !important;
+            }
+            &[theme="light"] {
+              background-color: $danger !important;
 
-                b {
-                  color: $light !important;
-                  border: 5px solid $light !important;
-                  // &::before {
-                  //   content: " ";
-                  // }
-                }
+              b {
+                color: $light;
               }
             }
 
             b {
-              font-size: 1.1rem;
-              color: $light;
-              border: 5px solid darken($medium, 20%);
-              &[less10="true"]::before {
-                content: "0";
+              display: flex;
+              &::before {
+                content: "\feff";
               }
+              &::after {
+                content: "\feff";
+              }
+            }
+          }
+
+          b {
+            font-size: 1rem;
+            color: $light;
+            border: 5px solid darken($medium, 20%);
+            &[less10="true"]::before {
+              content: "0";
             }
           }
         }
