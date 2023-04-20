@@ -15,7 +15,7 @@ header {
 
   h1 {
     a {
-      font-size: 2vmax;
+      font-size: 1.7rem;
       &[theme="dark"] {
         color: $warning;
       }
@@ -32,7 +32,7 @@ header {
     width: 50%;
 
     a {
-      font-size: 2vmax;
+      font-size: 2rem;
       transition: all 250ms;
       // text-decoration: none;
       border-radius: 10px;
@@ -83,36 +83,41 @@ footer {
     border-top: 3px solid $danger;
   }
 
-  #heart {
-    cursor: default;
-    transition: 200ms all;
-    &[theme="dark"] {
-      color: $warning;
-      &:hover {
-        color: $danger;
-      }
-    }
-    &[theme="light"] {
-      color: $danger;
-      &:hover {
-        color: $warning;
-      }
-    }
-  }
+  p {
+    font-size: 1rem;
 
-  a {
-    // font-size: 2vmax;
-    transition: 200ms all;
-    &[theme="dark"] {
-      color: $warning;
-      &:hover {
+    #heart {
+      font-size: 1.3rem;
+      cursor: default;
+      transition: 200ms all;
+      &[theme="dark"] {
+        color: $warning;
+        &:hover {
+          color: $danger;
+        }
+      }
+      &[theme="light"] {
         color: $danger;
+        &:hover {
+          color: $warning;
+        }
       }
     }
-    &[theme="light"] {
-      color: $danger;
-      &:hover {
+
+    a {
+      font-size: 1rem;
+      transition: 200ms all;
+      &[theme="dark"] {
         color: $warning;
+        &:hover {
+          color: $danger;
+        }
+      }
+      &[theme="light"] {
+        color: $danger;
+        &:hover {
+          color: $warning;
+        }
       }
     }
   }

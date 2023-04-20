@@ -58,18 +58,23 @@ export class GameComponent implements OnInit {
       // console.log(`[${this.title}#window.keydown] event`, event);
       console.log(`[${this.title}#window.keydown] event.key`, event.key);
 
-      if (event.key === 'Backspace') {
+      const treatedKey = event.key.toLowerCase().replace(/[^a-z]/g, '');
+      console.log(`[${this.title}#window.keydown] treatedKey`, treatedKey);
+
+      if (treatedKey == 'backspace') {
         this.currentWord = this.currentWord.slice(0, -1);
         return;
       }
 
-      if (event.key === 'Enter') {
+      if (treatedKey == 'enter') {
         this.updateIndexArray(this.currentWord);
         this.currentWord = '';
         return;
       }
 
-      this.currentWord += event.key;
+      if (treatedKey.length > 1) return;
+
+      this.currentWord += treatedKey;
 
       if (this.currentWord.length > 12) {
         this.updateIndexArray(this.currentWord.slice(0, -1));
