@@ -3,4 +3,17 @@
   <button *ngIf="gameRunning" (click)="stopGame()">STOP</button>
 
   <p *ngIf="gameRunning">{{currentWord}} {{12 - currentWord.length}}</p>
+
+  <div *ngIf="gameRunning" id="gameDiv">
+    <div *ngFor="let item of gameArray | keyvalue : defaultOrder" id="gameWord">
+      <p>{{$any(item).value.description}}</p>
+      <table>
+        <tr *ngFor="let letter of $any(item).value.word.split('') | keyvalue : defaultOrder">
+          <td>
+            <h1>#{{letter.key}} {{letter.value}}</h1>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </main>
