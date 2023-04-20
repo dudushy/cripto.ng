@@ -49,23 +49,19 @@ html, body {
 }
 
 //! CUSTOM SCROLLBAR [START]
-/* width */
 ::-webkit-scrollbar {
   width: 7px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background: $medium;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: $danger;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
   background: $dark;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $light;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $medium;
 }
 //! CUSTOM SCROLLBAR [FINISH]
