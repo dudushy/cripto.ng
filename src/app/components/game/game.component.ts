@@ -12,10 +12,10 @@ export class GameComponent implements OnInit {
   title = 'GameComponent';
 
   gameRunning = false;
+  wordLength = 12;
   currentWord = '';
   gameArray: any = [];
-  wordArray: any = [];
-  letterArray: any = [];
+  indexArray: any = [];
 
   sampleArray: any = [
     { word: 'radioterapia', description: 'Técnica empregada no tratamento do câncer.' },
@@ -35,25 +35,149 @@ export class GameComponent implements OnInit {
   ) {
     console.log(`[${this.title}#constructor]`);
 
-    this.gameRunning = this.db.get('gameRunning') || false;
+    // this.gameRunning = this.db.get('gameRunning') || false;
     console.log(`[${this.title}#constructor] gameRunning`, this.gameRunning);
+
+    // this.wordLength = this.db.get('wordLength') || 12;
+    console.log(`[${this.title}#constructor] wordLength`, this.wordLength);
+
+    // this.currentWord = this.db.get('currentWord') || '';
+    console.log(`[${this.title}#constructor] currentWord`, this.currentWord);
+
+    // this.gameArray = this.db.get('gameArray') || [];
+    console.log(`[${this.title}#constructor] gameArray`, this.gameArray);
+
+    // this.indexArray = this.db.get('indexArray') || [];
+    console.log(`[${this.title}#constructor] indexArray`, this.indexArray);
   }
 
   ngOnInit(): void {
     console.log(`[${this.title}#ngOnInit]`);
 
-    window.addEventListener('keypress', (event: any) => {
-      console.log(`[${this.title}#window.onkeypress] event`, event);
-      console.log(`[${this.title}#window.onkeypress] event.key`, event.key);
+    window.addEventListener('keydown', (event: any) => {
+      // console.log(`[${this.title}#window.keydown] event`, event);
+      console.log(`[${this.title}#window.keydown] event.key`, event.key);
+
+      if (event.key === 'Backspace') {
+        this.currentWord = this.currentWord.slice(0, -1);
+        return;
+      }
+
+      if (event.key === 'Enter') {
+        this.updateIndexArray(this.currentWord);
+        this.currentWord = '';
+        return;
+      }
 
       this.currentWord += event.key;
 
-      if (this.currentWord.length > 12 || event.key === 'Enter') {
+      if (this.currentWord.length > 12) {
+        this.updateIndexArray(this.currentWord.slice(0, -1));
         this.currentWord = '';
+        return;
       }
-
-      console.log(`[${this.title}#window.onkeypress] currentWord`, this.currentWord);
     });
+  }
+
+  updateIndexArray(word: any) {
+    console.log(`[${this.title}#updateIndexArray] word`, word);
+
+    console.log(`[${this.title}#updateIndexArray] (BEFORE) indexArray`, this.indexArray);
+
+    for (const [key, value] of Object.entries(this.gameArray)) {
+      console.log(`[${this.title}#updateIndexArray] gameArray[${key}]`, value);
+
+      if (word === this.gameArray[key].word) {
+        console.log(`[${this.title}#updateIndexArray] MATCH!`);
+
+        for (const letter of word) {
+          console.log(`[${this.title}#updateIndexArray] letter`, letter);
+          console.log(`[${this.title}#updateIndexArray] indexArray[${letter}]`, this.indexArray[letter]);
+
+          if (this.indexArray[letter]?.active) {
+            console.log(`[${this.title}#updateIndexArray] letter already active!`);
+            continue;
+          }
+
+          this.indexArray[letter].active = true;
+        }
+      }
+    }
+
+    console.log(`[${this.title}#updateIndexArray] (AFTER) indexArray`, this.indexArray);
+
+    this.saveGame();
+  }
+
+  createIndexArray(array: any) {
+    console.log(`[${this.title}#createIndexArray] array`, array);
+
+    this.indexArray = [];
+
+    for (const [key, value] of Object.entries(array)) {
+      console.log(`[${this.title}#updateLetterArray] array[${key}]`, value);
+
+      for (const letter of array[key].word) {
+        console.log(`[${this.title}#updateLetterArray] letter`, letter);
+
+        if (this.indexArray[letter]) {
+          console.log(`[${this.title}#updateLetterArray] letter already exists!`);
+          continue;
+        }
+
+        const id = Object.keys(this.indexArray).length;
+        console.log(`[${this.title}#updateLetterArray] id`, id);
+
+        this.indexArray[letter] = { id: id, active: false };
+      }
+    }
+
+    console.log(`[${this.title}#createIndexArray] indexArray`, this.indexArray);
+
+    this.saveGame();
+  }
+
+  createGameArray(array: any) {
+    console.log(`[${this.title}#createGameArray] array`, array);
+
+    this.gameArray = [];
+
+    for (const [key, value] of Object.entries(array)) {
+      console.log(`[${this.title}#updateLetterArray] array[${key}]`, value);
+
+      const correctWord = array[key].word.replace(/ /g, '');
+      console.log(`[${this.title}#updateLetterArray] correctWord`, correctWord);
+
+      this.gameArray.push({ word: correctWord, description: array[key].description });
+    }
+
+    console.log(`[${this.title}#createGameArray] gameArray`, this.gameArray);
+
+    this.createIndexArray(this.gameArray);
+
+    this.saveGame();
+  }
+
+  saveGame() {
+    console.log(`[${this.title}#saveGame] OUT OF ORDER!`);
+    return;
+    console.log(`[${this.title}#saveGame]`);
+
+    this.db.set('wordLength', this.wordLength);
+    console.log(`[${this.title}#saveGame] wordLength`, this.wordLength);
+
+    // this.db.set('currentWord', this.currentWord);
+    // console.log(`[${this.title}#saveGame] currentWord`, this.currentWord);
+
+    this.db.set('gameArray', this.gameArray);
+    console.log(`[${this.title}#saveGame] gameArray`, this.gameArray);
+    console.log(`[${this.title}#saveGame] {db} gameArray`, this.db.get('gameArray'));
+
+    this.db.set('indexArray', this.indexArray);
+    console.log(`[${this.title}#saveGame] indexArray`, this.indexArray);
+    console.log(`[${this.title}#saveGame] {db} indexArray`, this.db.get('indexArray'));
+
+    this.updateView();
   }
 
   startGame() {
@@ -62,14 +186,11 @@ export class GameComponent implements OnInit {
     this.gameRunning = true;
     this.db.set('gameRunning', this.gameRunning);
 
-    this.gameArray = this.sampleArray;
-    console.log(`[${this.title}#startGame] gameArray`, this.gameArray);
+    this.createGameArray(this.sampleArray);
 
-    // this.wordArray = this.gameArray.map((item) => item.word);
-    console.log(`[${this.title}#startGame] wordArray`, this.wordArray);
+    this.saveGame();
 
-    // this.letterArray = this.wordArray.map((word) => word.split(''));
-    console.log(`[${this.title}#startGame] letterArray`, this.letterArray);
+    console.log(`[${this.title}#startGame] GAME STARTED!`, this.gameArray, this.indexArray);
 
     this.updateView();
   }
@@ -79,6 +200,9 @@ export class GameComponent implements OnInit {
 
     this.gameRunning = false;
     this.db.set('gameRunning', this.gameRunning);
+
+    this.gameArray = [];
+    console.log(`[${this.title}#stopGame] gameArray`, this.gameArray);
 
     this.updateView();
   }
