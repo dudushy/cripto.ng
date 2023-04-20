@@ -207,6 +207,10 @@ export class GameComponent implements OnInit {
     this.updateView();
   }
 
+  defaultOrder() {
+    return 0;
+  }
+
   updateView() {
     console.log(`[${this.title}#updateView]`);
 
