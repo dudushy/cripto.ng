@@ -12,7 +12,7 @@
       <p>{{$any(item).value.description}}</p>
       <table>
         <tr *ngFor="let letter of $any(item).value.word.split('') | keyvalue : defaultOrder">
-          <td [attr.isActive]="indexArray[$any(letter).value].active">
+          <td [attr.theme]="app.theme" [attr.isActive]="indexArray[$any(letter).value].active">
             <b *ngIf="!indexArray[$any(letter).value].active" [attr.less10]="indexArray[$any(letter).value].id < 10">{{indexArray[$any(letter).value].id}}</b>
             <b *ngIf="indexArray[$any(letter).value].active"> {{letter.value}} </b>
           </td>
