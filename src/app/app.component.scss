@@ -75,6 +75,30 @@ header {
   }
 }
 
+#mobileWarning {
+  &[mobileMode="false"] {
+    display: none;
+  }
+  &[mobileMode="true"] {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $danger;
+    z-index: 99;
+
+    p {
+      margin-top: 30%;
+      font-size: 1.5rem;
+      color: $light;
+      text-align: center;
+      transform: rotate(-20deg);
+      padding-block: 2%;
+      border: 1px solid $light;
+    }
+  }
+}
+
 footer {
   &[theme="dark"] {
     border-top: 3px solid $warning;

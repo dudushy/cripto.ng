@@ -8,6 +8,10 @@
   </nav>
 </header>
 
+<div [attr.mobileMode]="mobileMode" id="mobileWarning">
+  <p>NOT AVALIABLE ON MOBILE</p>
+</div>
+
 <router-outlet></router-outlet>
 
 <footer [attr.theme]="theme" [attr.mobileMode]="mobileMode">
